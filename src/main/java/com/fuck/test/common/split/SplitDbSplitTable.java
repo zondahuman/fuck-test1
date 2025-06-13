@@ -6,6 +6,10 @@ import org.junit.Test;
 
 import java.util.Map;
 
+/**
+ * 分表算法为 (#shard_key % (数据库个数 * 表个数))，
+ * 分库算法为 (#shard_key % (数据库个数 * 表个数)) / 表个数，
+ */
 public class SplitDbSplitTable {
 
     @Test
@@ -30,10 +34,10 @@ public class SplitDbSplitTable {
         for (int i = 0; i <1000 ; i++) {
             Integer shard_key = (int) (Math.random() * 200);
 //            System.out.println("shard_key=" + shard_key);
-            Integer dbId = shard_key % (group_shard_num * table_shard_num);
+            Integer tableId = shard_key % (group_shard_num * table_shard_num);
 //            System.out.println("shard_key=" + shard_key + ", dbId=" + dbId);
 
-            Integer tableId = (shard_key % (group_shard_num * table_shard_num)) / table_shard_num;
+            Integer dbId = (shard_key % (group_shard_num * table_shard_num)) / table_shard_num;
 //            System.out.println("shard_key=" + shard_key + ", dbId=" + dbId + ", tableId=" + tableId);
             String key = "shard_key="+shard_key;
             String value = "   dbId=" + dbId + ", tableId=" + tableId;
