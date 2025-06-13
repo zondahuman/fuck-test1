@@ -23,7 +23,7 @@ public class SplitDbSplitTable {
         Integer group_shard_num = 8 ;
         Integer table_shard_num = 32;
         for (int i = 0; i <10 ; i++) {
-            Integer shard_key = (int) (Math.random() * 10);
+            Integer shard_key = (int) (Math.random() * 200);
             System.out.println("shard_key=" + shard_key);
             Integer dbId = shard_key % (group_shard_num * table_shard_num);
             System.out.println("shard_key=" + shard_key + ", dbId=" + dbId);
