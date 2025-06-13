@@ -26,10 +26,10 @@ public class SplitDbSplitTable {
             Integer shard_key = (int) (Math.random() * 10);
             System.out.println("shard_key=" + shard_key);
             Integer dbId = shard_key % (group_shard_num * table_shard_num);
-            System.out.println("shard_key=" + shard_key + "dbId=" + dbId);
+            System.out.println("shard_key=" + shard_key + ", dbId=" + dbId);
 
             Integer tableId = (shard_key % (group_shard_num * table_shard_num)) / table_shard_num;
-            System.out.println("shard_key=" + shard_key + "dbId=" + dbId + "tableId=" + tableId);
+            System.out.println("shard_key=" + shard_key + ", dbId=" + dbId + ", tableId=" + tableId);
         }
 
     }
