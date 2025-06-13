@@ -1,6 +1,10 @@
 package com.fuck.test.common.split;
 
+import com.fuck.test.util.json.JsonUtil;
+import com.google.common.collect.Maps;
 import org.junit.Test;
+
+import java.util.Map;
 
 public class SplitDbSplitTable {
 
@@ -20,17 +24,23 @@ public class SplitDbSplitTable {
      */
     @Test
     public void test2(){
-        Integer group_shard_num = 8 ;
-        Integer table_shard_num = 32;
-        for (int i = 0; i <10 ; i++) {
+        Map<String, String> paramsMap = Maps.newHashMap();
+        Integer group_shard_num = 2 ;
+        Integer table_shard_num = 16;
+        for (int i = 0; i <1000 ; i++) {
             Integer shard_key = (int) (Math.random() * 200);
-            System.out.println("shard_key=" + shard_key);
+//            System.out.println("shard_key=" + shard_key);
             Integer dbId = shard_key % (group_shard_num * table_shard_num);
-            System.out.println("shard_key=" + shard_key + ", dbId=" + dbId);
+//            System.out.println("shard_key=" + shard_key + ", dbId=" + dbId);
 
             Integer tableId = (shard_key % (group_shard_num * table_shard_num)) / table_shard_num;
-            System.out.println("shard_key=" + shard_key + ", dbId=" + dbId + ", tableId=" + tableId);
+//            System.out.println("shard_key=" + shard_key + ", dbId=" + dbId + ", tableId=" + tableId);
+            String key = "shard_key="+shard_key;
+            String value = "   dbId=" + dbId + ", tableId=" + tableId;
+//            paramsMap.put(key, value);
+            paramsMap.put(dbId+"", tableId+"");
         }
+        System.out.println("paramsMap=" + JsonUtil.toJson(paramsMap) );
 
     }
 
