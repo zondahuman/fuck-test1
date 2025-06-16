@@ -1,13 +1,12 @@
 package com.fuck.test.midware.hbase;
 
 import com.google.common.base.Preconditions;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.hbase.util.MD5Hash;
 import org.junit.Test;
 
-public class RowKeyTest {
+public class RowKeyUtil {
 
     public static String getRowKey(String driverId, String logStatus, String logType, long timestamp) {
         Preconditions.checkNotNull(driverId, "driverId 不能为空");
