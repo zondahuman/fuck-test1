@@ -50,6 +50,34 @@ public class SplitDbSplitTable {
 
 
 
+    /**
+     * 分库分表目前默认使用的是取模算法，
+     * 分表算法为 (#shard_key % (数据库个数 * 表个数))，
+     * 分库算法为 (#shard_key % (数据库个数 * 表个数)) / 表个数，
+     * 分表算法为 (#shard_key % (group_shard_num * table_shard_num))，
+     * 分库算法为 (#shard_key % (group_shard_num * table_shard_num)) / table_shard_num，
+     * 其中group_shard_num为分库个数，table_shard_num为每个库的分表个数。
+     */
+    @Test
+    public void test3(){
+        Map<String, String> paramsMap = Maps.newHashMap();
+        Integer group_shard_num = 4 ;
+        Integer table_shard_num = 16;
+        for (int i = 0; i <1000 ; i++) {
+            Integer shard_key = (int) (Math.random() * 20000);
+//            System.out.println("shard_key=" + shard_key);
+            Integer tableId = shard_key % (group_shard_num * table_shard_num);
+//            System.out.println("shard_key=" + shard_key + ", dbId=" + dbId);
+
+            Integer dbId = (shard_key % (group_shard_num * table_shard_num)) / table_shard_num;
+            System.out.println("shard_key=" + shard_key + ", dbId=" + dbId + ", tableId=" + tableId);
+
+            paramsMap.put(tableId+"", dbId+"");
+//            paramsMap.put(dbId+"", tableId+"");
+        }
+        System.out.println("paramsMap=" + JsonUtil.toJson(paramsMap) );
+
+    }
 
 
 
