@@ -56,7 +56,11 @@ public class RowKeyUtil {
         long ts = Long.MAX_VALUE / 1000000 - timestamp;
 
         String key = getSaltRowKey(driverId, logStatus, logType, timestamp);
-        System.out.println("key=" + key);
+        System.out.println("key=" + key+",length="+key.length());
     }
+
+
+
+    
 
 }
