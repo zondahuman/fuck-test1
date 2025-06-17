@@ -11,7 +11,7 @@ public class RowKeyUtil {
     public static String getRowKey(String driverId, String logStatus, String logType, long timestamp) {
         Preconditions.checkNotNull(driverId, "driverId 不能为空");
         Preconditions.checkArgument(StringUtils.equals(logStatus, "1") || StringUtils.equals(logStatus, "2"), "状态只能为1, 2");
-        Preconditions.checkArgument(StringUtils.equals(logStatus, "1") || StringUtils.equals(logStatus, "2"), "类型只能为1, 2");
+        Preconditions.checkArgument(StringUtils.equals(logType, "1") || StringUtils.equals(logType, "2"), "类型只能为1, 2");
         Preconditions.checkArgument(Long.valueOf(timestamp).toString().length() == 13, "时间戳长度必须为13");
 
 //        String salt = MD5Hash.getMD5AsHex(Bytes.toBytes(driverId)).substring(0, 5);
