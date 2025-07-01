@@ -193,6 +193,7 @@ public class GuavaLoadingCacheTest {
         try {
 //            System.out.println(caches.get("key-zorro"));
             System.out.println(caches.get("1"));
+            System.out.println(caches.stats());
         } catch (ExecutionException e) {
             e.printStackTrace();
         }

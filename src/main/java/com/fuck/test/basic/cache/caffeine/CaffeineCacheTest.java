@@ -115,9 +115,11 @@ public class CaffeineCacheTest {
         cache.put("key2", "value2");
         System.out.println("before------cache.get=" + cache.get("key1"));
         System.out.println("before------cache.getIfPresent=" + cache.getIfPresent("key1"));
+        System.out.println("before------cache.stats()=" + cache.stats());
         Thread.sleep(8000);
         System.out.println("after------cache.get=" + cache.get("key1"));
         System.out.println("after------cache.getIfPresent=" + cache.getIfPresent("key1"));
+        System.out.println("after------cache.stats()=" + cache.stats());
 
 
     }
