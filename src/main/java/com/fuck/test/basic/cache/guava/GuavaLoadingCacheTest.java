@@ -135,6 +135,7 @@ public class GuavaLoadingCacheTest {
         System.out.println("before---cache.get=" + cache.get("5"));
         System.out.println("before---cache.getIfPresent=" + cache.getIfPresent("5"));
         Thread.sleep(5000);
+        System.out.println("after---cache.get=" + cache.get("5"));
         System.out.println("after---cache.getIfPresent=" + cache.getIfPresent("5"));
 
     }
