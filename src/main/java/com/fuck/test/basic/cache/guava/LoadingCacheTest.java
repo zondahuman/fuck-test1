@@ -56,13 +56,21 @@ public class LoadingCacheTest {
 
 
     @Test
-    public void test3(){
+    public void test3() throws InterruptedException, ExecutionException {
         LoadingCache<String,Object> cache= CacheBuilder.newBuilder()
                 /*
                 加附加的功能
                 */
                 //最大个数
                 .maximumSize(3)
+                .recordStats().removalListener(new RemovalListener<Object, Object>() {
+                    @Override
+                    public void onRemoval(RemovalNotification<Object, Object> removalNotification) {
+                        //移除的key 移除的原因
+                        System.out.println("移除的key 移除的原因, "+removalNotification.getKey()+":"+removalNotification.getCause());
+                    }
+                })
+                .expireAfterAccess(3, TimeUnit.SECONDS)
                 .build(new CacheLoader<String, Object>() {
                     //读取数据源
                     @Override
@@ -71,8 +79,10 @@ public class LoadingCacheTest {
                     }
                 });
         //读取缓存中的1的数据 缓存有就读取 没有就返回null
-        System.out.println(cache.getIfPresent("5"));
-
+        System.out.println("before---cache.get=" + cache.get("5"));
+        System.out.println("before---cache.getIfPresent=" + cache.getIfPresent("5"));
+        Thread.sleep(5000);
+        System.out.println("after---cache.getIfPresent=" + cache.getIfPresent("5"));
     }
 
 
