@@ -6,6 +6,8 @@ import com.github.benmanes.caffeine.cache.*;
 import org.jspecify.annotations.Nullable;
 import org.junit.Test;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class CaffeineCacheTest {
@@ -123,6 +125,27 @@ public class CaffeineCacheTest {
 
 
     }
+
+
+
+    @Test
+    public void test5() throws ExecutionException, InterruptedException {
+
+        AsyncLoadingCache<String, String> asyncLoadingCache = Caffeine.newBuilder()
+                .maximumSize(1000)
+                .buildAsync(key -> "values111");
+
+        CompletableFuture<String> g = asyncLoadingCache.get("test");
+        String value = g.get();
+        System.out.println("value----="+value);
+
+    }
+
+    static String slowMethod(String key) throws Exception {
+        Thread.sleep(1000);
+        return key + ".result";
+    }
+
 
 
 }
